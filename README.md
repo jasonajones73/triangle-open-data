@@ -1,4 +1,4 @@
-# raleigh-open-data
+# Triangle Open Data
 
 ## Build Setup
 
