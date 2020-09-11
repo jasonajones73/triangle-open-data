@@ -18,9 +18,6 @@ export const mutations = {
   POPULATE_DURHAM_CATALOG(state, catalog) {
     state.durhamCatalog = catalog
   },
-  UPDATE_LOADING_STATUS(state) {
-    state.consolidatedLoading = !state.consolidatedLoading
-  },
   CONSOLIDATE_CATALOGS(state) {
     state.consolidatedCatalogs = []
     state.raleighCatalog.forEach((item) =>
@@ -60,8 +57,6 @@ export const actions = {
       })
   },
   consolidateCatalogs({ commit }) {
-    commit('UPDATE_LOADING_STATUS')
     commit('CONSOLIDATE_CATALOGS')
-    commit('UPDATE_LOADING_STATUS')
   },
 }

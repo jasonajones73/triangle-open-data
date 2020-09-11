@@ -1,19 +1,39 @@
 <template>
   <v-sheet>
     <v-parallax src="/raleigh.jpg" height="300"></v-parallax>
+    <v-row>
+      <v-card class="ma-auto">
+        <v-tabs>
+          <v-tab
+            v-for="item in publishers"
+            :key="item"
+            @click="publisherDisplay(item)"
+          >
+            {{ item }}
+          </v-tab>
+        </v-tabs>
+      </v-card>
+    </v-row>
+    <v-row class="mx-16">
+      <v-col class="ma-auto">
+        <v-card v-for="(entry, index) in filteredCatalog" :key="index">
+          <v-card-title>{{ entry.title }}</v-card-title>
+          <v-card-actions>Tags: {{ entry.keyword }}</v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
     <v-container>
       <v-row><h1>Find by publishers:</h1></v-row>
       <v-row>
-        <v-col
+        <v-chip
           v-for="item in publishers"
           :key="item"
-          cols="4"
-          style="min-width: fit-content"
+          color="pink"
+          dark
+          class="ma-1"
+          @click="selected(item)"
+          >{{ item }}</v-chip
         >
-          <v-btn x-large block rounded @click="selected(item)">{{
-            item
-          }}</v-btn>
-        </v-col>
       </v-row>
       <v-row><h1>Find by distribution type:</h1></v-row>
       <v-row>
@@ -49,9 +69,10 @@ export default {
   data() {
     return {
       selectedValue: '',
+      selectedPublisher: 'City of Raleigh',
       headers: [
         { text: 'Data Set Name', value: 'title' },
-        { text: 'Publisher', value: 'publisher.source' },
+        { text: 'Publisher', value: 'publisher.name' },
         { text: 'Access Level', value: 'accessLevel' },
       ],
     }
@@ -61,7 +82,7 @@ export default {
     publishers() {
       const pubs = []
       this.raleighCatalog.forEach((element) => {
-        pubs.push(element.publisher.source)
+        pubs.push(element.publisher.name)
       })
       return Array.from(new Set(pubs))
     },
@@ -85,13 +106,16 @@ export default {
     },
     filteredCatalog() {
       return this.raleighCatalog.filter(
-        (element) => element.publisher.source === this.selectedValue
+        (element) => element.publisher.name === this.selectedPublisher
       )
     },
   },
   methods: {
     selected(value) {
       this.selectedValue = value
+    },
+    publisherDisplay(value) {
+      this.selectedPublisher = value
     },
   },
 }

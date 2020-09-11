@@ -1,24 +1,21 @@
 <template>
   <v-sheet>
-    <v-row align="center" justify="center">
-      <v-col class="text-center" cols="12"><h1>Triangle Open Data</h1></v-col>
+    <v-row class="mx-16">
+      <v-card class="my-8" width="100%">
+        <v-card-title>Consolidated Open Data</v-card-title>
+        <v-card-text
+          >A simple web application that provides quick access to consolidated
+          open data catalogs from across The Triangle
+        </v-card-text>
+      </v-card>
     </v-row>
-    <v-row class="ml-2 mr-2"
-      ><v-col v-for="city in cities" :key="city.city" cols="4"
-        ><v-card
-          align="center"
-          justify="center"
-          :color="city.color"
-          :to="city.link"
-          nuxt
-          dark
-        >
-          <v-img :src="city.img" height="150"
-            ><h1>{{ city.city }}</h1></v-img
-          ></v-card
-        ></v-col
-      ></v-row
-    >
+    <v-row v-for="city in cities" :key="city.city" class="mx-16">
+      <v-card :to="city.link" nuxt class="my-1" width="100%">
+        <v-img :src="city.img" height="150">
+          <h1 align="center" style="color: white">{{ city.city }}</h1>
+        </v-img>
+      </v-card>
+    </v-row>
   </v-sheet>
 </template>
 

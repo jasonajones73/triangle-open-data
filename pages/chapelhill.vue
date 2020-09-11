@@ -51,7 +51,7 @@ export default {
       selectedValue: '',
       headers: [
         { text: 'Data Set Name', value: 'title' },
-        { text: 'Publisher', value: 'publisher.source' },
+        { text: 'Publisher', value: 'publisher.name' },
         { text: 'Access Level', value: 'accessLevel' },
       ],
     }
@@ -61,7 +61,7 @@ export default {
     publishers() {
       const pubs = []
       this.chapelCatalog.forEach((element) => {
-        pubs.push(element.publisher.source)
+        pubs.push(element.publisher.name)
       })
       return Array.from(new Set(pubs))
     },
@@ -85,7 +85,7 @@ export default {
     },
     filteredCatalog() {
       return this.chapelCatalog.filter(
-        (element) => element.publisher.source === this.selectedValue
+        (element) => element.publisher.name === this.selectedValue
       )
     },
   },
